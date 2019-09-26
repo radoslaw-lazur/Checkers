@@ -55,18 +55,15 @@ public class Field extends Rectangle {
     }
 
     private static List<Coordinates> createfieldsToNotify() {
-        List<Coordinates> coordinates = new ArrayList<>();
-        return coordinates;
+        return new ArrayList<>();
     }
 
     private static List<Coordinates> createRedQueenList() {
-        List<Coordinates> coordinates = new ArrayList<>();
-        return coordinates;
+        return new ArrayList<>();
     }
 
     private static List<Coordinates> createGreenQueenList() {
-        List<Coordinates> coordinates = new ArrayList<>();
-        return coordinates;
+        return new ArrayList<>();
     }
 
     private GameController gameController;
@@ -111,10 +108,6 @@ public class Field extends Rectangle {
 
         if (activeField) {
             setOnMouseClicked(event -> gameController.onMouseClicked(this));
-            //setOnMouseEntered(event -> gameController.onMouseEntered(this));
-            //setOnMouseExited(event -> gameController.onMouseExited(this));
-            //setOnMousePressed(event -> gameController.onMousePressed(this));
-            //setOnMouseDragExited(event -> gameController.onMouseRealase(this));
         }
 
         this.gameController.addField(new Coordinates(x, y), this);
@@ -951,5 +944,21 @@ public class Field extends Rectangle {
 
     private void setGreenTaken(boolean taken) {
         isGreenTaken = taken;
+    }
+
+    public static Set<Coordinates> getPlayerRedFields() {
+        return playerRedFields;
+    }
+
+    public static Set<Coordinates> getPlayerGreenFields() {
+        return playerGreenFields;
+    }
+
+    public static List<Coordinates> getPlayerRedQueens() {
+        return playerRedQueens;
+    }
+
+    public static List<Coordinates> getPlayerGreenQueens() {
+        return playerGreenQueens;
     }
 }

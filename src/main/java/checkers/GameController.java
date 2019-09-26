@@ -26,7 +26,6 @@ class GameController {
         checkerMap.put(coordinates, field);
     }
 
-
     void onMouseClicked(Field field) {
         System.out.println("Possible playerGreen win: " + possibleGreenWin);
         System.out.println("Possible playerRed win: " + possibleRedWin);
@@ -35,17 +34,9 @@ class GameController {
             if (field.isRedTaken) {
                 field.checkMoveRed(field.x, field.y);
                 isFieldChoosen = true;
+                board.setGreenWinner(possibleGreenWin);
+                board.setRedWinner(possibleRedWin);
             } else if (isFieldChoosen) {
-                if (playerGreenSize + 1 == 0) {
-                    board.setRedWinner(true);
-                } else {
-                    board.setRedWinner(possibleRedWin);
-                }
-                if (playerRedSize + 1 == 0) {
-                    board.setGreenWinner(true);
-                } else {
-                    board.setGreenWinner(possibleGreenWin);
-                }
                 field.makeMoveRed(field.x, field.y);
                 isGreenTurn = true;
                 isFieldChoosen = false;
@@ -55,24 +46,21 @@ class GameController {
             if (field.isGreenTaken) {
                 field.checkMoveGreen(field.x, field.y);
                 isFieldChoosen = true;
+                board.setGreenWinner(possibleGreenWin);
+                board.setRedWinner(possibleRedWin);
             } else if (isFieldChoosen) {
-                if (playerRedSize + 1 == 0) {
-                    board.setGreenWinner(true);
-                } else {
-                    board.setGreenWinner(possibleGreenWin);
-                }
-                if (playerGreenSize + 1 == 0) {
-                    board.setRedWinner(true);
-                } else {
-                    board.setRedWinner(possibleRedWin);
-                }
                 field.makeMoveGreen(field.x, field.y);
                 isGreenTurn = false;
                 isFieldChoosen = false;
                 board.setTurnNotification(true);
             }
         }
-
+        if (Field.getPlayerRedFields().size() - Field.getPlayerRedQueens().size() == 0) {
+            board.setGreenWinner(true);
+        }
+        if (Field.getPlayerGreenFields().size() - Field.getPlayerGreenQueens().size() == 0) {
+            board.setRedWinner(true);
+        }
     }
 
     void makeCheckerRedFalse(Coordinates coordinates) {
